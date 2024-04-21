@@ -27,7 +27,11 @@ def test_basic_initinfo():
 
 @pytest.mark.api
 def test_basic_not_implemented_yet1(tmp_path):
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(FileExistsError):
+
+        with py7zr.SevenZipFile(tmp_path.joinpath("test_x.7z"), mode="w") as archive:
+            archive.write(os.path.join(testdata_path, "test1.txt"), "test1.txt")
+
         py7zr.SevenZipFile(tmp_path.joinpath("test_x.7z"), mode="x")
 
 
